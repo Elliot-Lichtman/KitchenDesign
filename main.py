@@ -24,6 +24,11 @@ class Thing:
         self.height = height
         self.name = name
         self.selected = False
+
+    def flip(self):
+        temp = self.width
+        self.width = self.height
+        self.height = temp
     
     def draw(self, screen):
         pygame.draw.rect(screen, (0, 0, 0), (self.x*20, self.y*20, self.width*20, self.height*20))
@@ -74,7 +79,6 @@ objects.append(pantry1)
 objects.append(pantry2)
 objects.append(bigPantry)
 objects.append(bigFridge1)
-objects.append(bigFridge2)
 objects.append(miniFridge)
 objects.append(grill)
 objects.append(fryer)
@@ -91,6 +95,10 @@ while not gameOver:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 gameOver = True
+            if event.key == pygame.K_f:
+                for object in objects:
+                    if object.selected:
+                        object.flip()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             if not clicked:
@@ -117,8 +125,8 @@ while not gameOver:
 
     for object in objects:
         if object.selected:
-            object.x = event.pos[0]//20
-            object.y = event.pos[1]//20
+            object.x = pygame.mouse.get_pos()[0]//20
+            object.y = pygame.mouse.get_pos()[1]//20
         object.draw(screen)
         
 
