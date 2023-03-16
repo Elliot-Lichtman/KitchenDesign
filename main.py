@@ -108,6 +108,8 @@ while not gameOver:
                     object.selected = False
             
             if not found:
+                if grid[event.pos[0]//20][event.pos[1]//20] == 1:
+                    grid[event.pos[0]//20][event.pos[1]//20] = 0
                 grid[event.pos[0]//20][event.pos[1]//20] = 1
 
     drawBackground(screen)
